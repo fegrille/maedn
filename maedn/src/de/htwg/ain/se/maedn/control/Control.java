@@ -1,15 +1,18 @@
-package de.htwg.ain.se.maedn;
+package de.htwg.ain.se.maedn.control;
 
-public class Control {
+import de.htwg.ain.se.maedn.fields.Fields;
+import de.htwg.ain.se.maedn.kill.Kill;
+import de.htwg.ain.se.maedn.player.Player;
+import de.htwg.ain.se.maedn.roll.Roll;
 
-	
+public class Control implements Icontrol{
 
 	//**********************Objects****************************
 	private Roll doRoll = new Roll();
 	private Kill killer = new Kill();
 	
 	private Player[] playerList;
-	Fields field = new Fields();
+	public Fields field = new Fields();
 	
 	//**********************variables****************************
 	private static final int FIRSTPLAYER = 1;
@@ -55,16 +58,19 @@ public class Control {
 		
 	}
 	//**********************Get Set****************************
-	Player getPlayer(int place){
+	@Override
+	public Player getPlayer(int place){
 		return playerList[place -1];
 	}
 	
+	@Override
 	public void setPlayerfield(Player[] playerList) {
 		this.playerList = playerList;
 	}
 	
 	//**********************No Figure on Field****************************
-	void noFigureOnField(int player) {
+	@Override
+	public void noFigureOnField(int player) {
 		switch(player) {
 			case(1):
 				putBlueOnField();
@@ -88,41 +94,50 @@ public class Control {
 	}
 	
 	//**********************Is figure on Field?****************************
+	@Override
 	public boolean isFigureOnField1() {
 		return figureOnField1;
 	}
 
 	//**********************Set Figures on field****************************
+	@Override
 	public void setFigureOnField1(boolean figureOnField1) {
 		this.figureOnField1 = figureOnField1;
 	}
 
+	@Override
 	public boolean isFigureOnField2() {
 		return figureOnField2;
 	}
 
+	@Override
 	public void setFigureOnField2(boolean figureOnField2) {
 		this.figureOnField2 = figureOnField2;
 	}
 
+	@Override
 	public boolean isFigureOnField3() {
 		return figureOnField3;
 	}
 
+	@Override
 	public void setFigureOnField3(boolean figureOnField3) {
 		this.figureOnField3 = figureOnField3;
 	}
 
+	@Override
 	public boolean isFigureOnField4() {
 		return figureOnField4;
 	}
 
+	@Override
 	public void setFigureOnField4(boolean figureOnField4) {
 		this.figureOnField4 = figureOnField4;
 	}
 
 	
 	//**********************put Figures on Field****************************
+	@Override
 	public void putBlueOnField() {
 		if(!getPlayer(FIRSTPLAYER).getFigure(1).isOnField()){
 			getPlayer(FIRSTPLAYER).getFigure(1).putOnField();
@@ -144,6 +159,7 @@ public class Control {
 		}
 	}
 	
+	@Override
 	public void putGreenOnField() {
 		if(!getPlayer(SECONDPLAYER).getFigure(1).isOnField()){
 			getPlayer(SECONDPLAYER).getFigure(1).putOnField();
@@ -164,6 +180,7 @@ public class Control {
 		}
 	}
 	
+	@Override
 	public void putYellowOnField() {
 		if(!getPlayer(THIRDPLAYER).getFigure(1).isOnField()){
 			getPlayer(THIRDPLAYER).getFigure(1).putOnField();
@@ -184,6 +201,7 @@ public class Control {
 		}
 	}
 	
+	@Override
 	public void putRedOnField() {
 		if(!getPlayer(FOURTHPLAYER).getFigure(1).isOnField()){
 			getPlayer(FOURTHPLAYER).getFigure(1).putOnField();
@@ -207,6 +225,7 @@ public class Control {
 	public boolean collidateOwnFigures(final int[] fieldinfo, int player) {
 		return true;
 	}
+	@Override
 	public boolean collidateOtherFigures(final int[] fieldinfo) {
 		
 		playerList = killer.kill(playerList, fieldinfo[0], fieldinfo[1]);
@@ -214,16 +233,19 @@ public class Control {
 	}
 	
 	//**********************Initialisizing first Roll****************************
+	@Override
 	public int start () {
 		return doRoll.firstRoll();
 	}
 	
 	//**********************Initialisizing Roll****************************
+	@Override
 	public int rolls() {
 		return doRoll.roll();
 	}
 	
 	//**********************Test Field status****************************
+	@Override
 	public int[] fieldStatus(int numberRolled,int player, int figure){
 		
 		int newPosition = getPlayer(player).getFigure(figure).getList().get(numberRolled -1);
@@ -232,13 +254,9 @@ public class Control {
 		return status;
 	}
 	
-	//**********************Test rest figure move size****************************
-	
-	
-	
-	
 	//**********************Change fieldstatus************************************
 	
+	@Override
 	public void changeFieldStatus(int player, int figure) {
 		
 		int[] information = new int[2];
@@ -247,6 +265,7 @@ public class Control {
 		field.setFieldStatus(getPlayer(player).getFigure(figure).getPosition(), information);
 	}
 	
+	@Override
 	public void deleteFieldStatus(int player, int figure) {
 		int[] information = new int[2];
 		information[0] = 0;
@@ -257,6 +276,7 @@ public class Control {
 	
 	//**********************Check for win*****************************************
 	
+	@Override
 	public boolean win(int player) {
 		boolean end = true;
 		switch(player) {

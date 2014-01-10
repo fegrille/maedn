@@ -1,10 +1,14 @@
-package de.htwg.ain.se.maedn;
+package de.htwg.ain.se.maedn.fields;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Fields {
+public class Fields implements Ifields{
 	
+	//**********************Objects****************************
+	Map<Integer,int[]> allFields = new TreeMap<>();
+	
+	//**********************Constructor****************************
 	public Fields() {
 		for(int i = 1; i <= 40; i++) {
 			int[] a = new int[2];
@@ -38,13 +42,14 @@ public class Fields {
 		}
 	}
 
-	Map<Integer,int[]> allFields = new TreeMap<>();
-	
-	void setFieldStatus(int number, int[] figure){
+	//**********************Get Fieldstatus, Set Fieldstatus****************************
+	@Override
+	public void setFieldStatus(int number, int[] figure){
 		allFields.put(number, figure);		
 	}
-	
-	int[] getFieldStatus(int number){
+
+	@Override
+	public int[] getFieldStatus(int number){
 		
 		return allFields.get(number);
 		

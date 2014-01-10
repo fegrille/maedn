@@ -1,6 +1,6 @@
 package de.htwg.ain.se.maedn.control;
 
-import de.htwg.ain.se.maedn.Player;
+import de.htwg.ain.se.maedn.player.Player;
 
 
 /**
@@ -10,7 +10,7 @@ import de.htwg.ain.se.maedn.Player;
  * @since 10.01.2014
  */
 
-public interface IControl {
+public interface Icontrol {
 	
 	/**
 	 * Returns player from array index player - 1

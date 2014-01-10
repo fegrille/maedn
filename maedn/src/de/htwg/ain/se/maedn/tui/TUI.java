@@ -1,4 +1,4 @@
-package de.htwg.ain.se.maedn;
+package de.htwg.ain.se.maedn.tui;
 
 import java.io.BufferedReader;
 import java.io.IOException;

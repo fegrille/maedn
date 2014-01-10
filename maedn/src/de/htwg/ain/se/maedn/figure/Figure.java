@@ -1,13 +1,18 @@
-package de.htwg.ain.se.maedn;
+package de.htwg.ain.se.maedn.figure;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class Figure {
-	private int position = 0;
+public class Figure implements Ifigure{
 	
+	//**********************Objects****************************
 	private List<Integer> fields = new ArrayList<Integer>();
+	
+	//**********************Variables****************************
+	private int position = 0;
 	private boolean onField = false;
+	
+	//**********************Constances****************************
 	private static final int THIRDCASE = 3;
 	private static final int FOURTHCASE = 4;
 	private static final int ENDPOSITIONYELLOW = 30;
@@ -18,6 +23,7 @@ public class Figure {
 	private static final int STARTOFYELLOW = 31;
 	private static final int STARTOFGREEN = 21;
 	
+	//**********************Constructor****************************
 	public Figure(final int player) {
 		switch(player) {
 		case(1):
@@ -66,14 +72,20 @@ public class Figure {
 			break;
 		}
 	}
+	
+	//**********************Get Position, Set Position****************************
+	@Override
 	public void setPosition() {
 		this.position = fields.remove(0);
 	}
-	
+
+	@Override
 	public int getPosition() {
 		return position;
 	}
 	
+	//**********************Move****************************
+	@Override
 	public void move(int roll) {
 		if(roll < fields.size()) {
 			for(int i = 0; i < roll; i++){
@@ -84,27 +96,37 @@ public class Figure {
 		}
 	}
 	
+	//**********************PutOnField****************************
+	@Override
 	public void putOnField() {
 		setOnField(true);
 		setPosition();
 	}
 	
+	//**********************KickFromField****************************
+	@Override
 	public void kickFromField() {
 		setOnField(false);
 	}
 	
+	//**********************Get onField, Set onField****************************
+	@Override
 	public boolean isOnField() {
 		return onField;
 	}
+	
+	@Override
 	public void setOnField(boolean onField) {
 		this.onField = onField;
 	}
 	
 	//**********************Get List, Set List****************************
+	@Override
 	public List<Integer> getList(){
 		return fields;
 	}
 	
+	@Override
 	public void setList(List<Integer> newList){
 		fields = newList;
 	}

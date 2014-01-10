@@ -1,6 +1,6 @@
 package de.htwg.ain.se.maedn.kill;
 
-import de.htwg.ain.se.maedn.Player;
+import de.htwg.ain.se.maedn.player.Player;
 
 /**
  * Kills a figure from a player.

@@ -1,6 +1,6 @@
 package de.htwg.ain.se.maedn.player;
 
-import de.htwg.ain.se.maedn.Figure;
+import de.htwg.ain.se.maedn.figure.Figure;
 
 public interface Iplayer {
 
