@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import de.htwg.ain.se.maedn.control.Control;
 
 public final class TUI {
 	
@@ -161,29 +162,104 @@ public final class TUI {
 							//checken ob die figur mit anderen eigenen figuren kollidiert
 							//dann check ob die figur mit anderen figuren von anderen spielern kollidiert
 							if(run > (c1.getPlayer(player).getFigure(choice).getList().size()-4)){
-								checking = c1.field.getFieldStatus(41);
-								if(checking[0] == 1)
-									continue;
-								checking = c1.field.getFieldStatus(42);
-								if(checking[0] == 1){
-									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-3)){
-										break;
+								//*************************Figure not in End Position yet***********************
+								if(c1.getPlayer(player).getFigure(choice).getPosition()<=40){
+									checking = c1.field.getFieldStatus(41);
+									if(checking[0] == player)
+										continue;
+									checking = c1.field.getFieldStatus(42);
+									if(checking[0] != player){
+										if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-3)){
+											break;
+										}
+									}else{
+										continue;
 									}
-									continue;
-								}
-								checking = c1.field.getFieldStatus(43);
-								if(checking[0] == 1){
-									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
-										break;
+									checking = c1.field.getFieldStatus(43);
+									if(checking[0] != player){
+										if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
+											break;
+										}
+									}else{
+										continue;
 									}
-									continue;
-								}
-								checking = c1.field.getFieldStatus(44);
-								if(checking[0] == 1){
-									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
-										break;
+									checking = c1.field.getFieldStatus(44);
+									if(checking[0] != player){
+										if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
+											break;
+										}
 									}
-									continue;
+								}else{//*************************Figure in End Position yet**********************
+									if(c1.getPlayer(player).getFigure(choice).getPosition() == 44){
+										log.info(newLine + "You can't move, because Figure is already on last field!");
+										continue;
+									}
+									checking = c1.field.getFieldStatus(44);
+									if(c1.getPlayer(player).getFigure(choice).getPosition() == 43){
+										if(checking[0] == player){
+											log.info(newLine + "You can't move, because Figure is already on last field!");
+											continue;
+										}else{
+											if(run > 1){
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+											break;
+										}
+									}
+									if(c1.getPlayer(player).getFigure(choice).getPosition() == 42){
+										checking = c1.field.getFieldStatus(43);
+										if(checking[0] == player){
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+										checking = c1.field.getFieldStatus(44);
+										if(checking[0] == player){
+											if(run != 1){
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+											break;
+										}else{
+											if(run <= 2){
+												break;
+											}else{
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+										}
+									}
+									if(c1.getPlayer(player).getFigure(choice).getPosition() == 41){
+										checking = c1.field.getFieldStatus(42);
+										if(checking[0] == player){
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+										checking = c1.field.getFieldStatus(43);
+										if(checking[0] == player){
+											if(run != 1){
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+											break;
+										}
+										checking = c1.field.getFieldStatus(44);
+										if(checking[0] == player){
+											if(run <= 2){
+												break;
+											}else{
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+										}else{
+											if(run <= 3){
+												break;
+											}else{
+												log.info(newLine + "You can't move, because there are too few fields!");
+												continue;
+											}
+										}
+									}
 								}
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
@@ -352,29 +428,104 @@ public final class TUI {
 						//checken ob die figur mit anderen eigenen figuren kollidiert
 						//dann check ob die figur mit anderen figuren von anderen spielern kollidiert
 						if(run > (c1.getPlayer(player).getFigure(choice).getList().size()-4)){
-							checking = c1.field.getFieldStatus(51);
-							if(checking[0] == 1)
-								continue;
-							checking = c1.field.getFieldStatus(52);
-							if(checking[0] == 1){
-								if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-3)){
-									break;
+							//*************************Figure not in End Position yet***********************
+							if(c1.getPlayer(player).getFigure(choice).getPosition()<=40){
+								checking = c1.field.getFieldStatus(51);
+								if(checking[0] == player)
+									continue;
+								checking = c1.field.getFieldStatus(52);
+								if(checking[0] != player){
+									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-3)){
+										break;
+									}
+								}else{
+									continue;
 								}
-								continue;
-							}
-							checking = c1.field.getFieldStatus(53);
-							if(checking[0] == 1){
-								if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
-									break;
+								checking = c1.field.getFieldStatus(53);
+								if(checking[0] != player){
+									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
+										break;
+									}
+								}else{
+									continue;
 								}
-								continue;
-							}
-							checking = c1.field.getFieldStatus(54);
-							if(checking[0] == 1){
-								if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
-									break;
+								checking = c1.field.getFieldStatus(54);
+								if(checking[0] != player){
+									if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
+										break;
+									}
 								}
-								continue;
+							}else{//*************************Figure in End Position yet**********************
+								if(c1.getPlayer(player).getFigure(choice).getPosition() == 54){
+									log.info(newLine + "You can't move, because Figure is already on last field!");
+									continue;
+								}
+								checking = c1.field.getFieldStatus(54);
+								if(c1.getPlayer(player).getFigure(choice).getPosition() == 53){
+									if(checking[0] == player){
+										log.info(newLine + "You can't move, because Figure is already on last field!");
+										continue;
+									}else{
+										if(run > 1){
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+										break;
+									}
+								}
+								if(c1.getPlayer(player).getFigure(choice).getPosition() == 52){
+									checking = c1.field.getFieldStatus(53);
+									if(checking[0] == player){
+										log.info(newLine + "You can't move, because there are too few fields!");
+										continue;
+									}
+									checking = c1.field.getFieldStatus(54);
+									if(checking[0] == player){
+										if(run != 1){
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+										break;
+									}else{
+										if(run <= 2){
+											break;
+										}else{
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+									}
+								}
+								if(c1.getPlayer(player).getFigure(choice).getPosition() == 51){
+									checking = c1.field.getFieldStatus(52);
+									if(checking[0] == player){
+										log.info(newLine + "You can't move, because there are too few fields!");
+										continue;
+									}
+									checking = c1.field.getFieldStatus(53);
+									if(checking[0] == player){
+										if(run != 1){
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+										break;
+									}
+									checking = c1.field.getFieldStatus(54);
+									if(checking[0] == player){
+										if(run <= 2){
+											break;
+										}else{
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+									}else{
+										if(run <= 3){
+											break;
+										}else{
+											log.info(newLine + "You can't move, because there are too few fields!");
+											continue;
+										}
+									}
+								}
 							}
 							log.info(newLine + "You can't move, because there are too few fields!");
 							continue;
