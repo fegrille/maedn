@@ -1,4 +1,4 @@
-package de.htwg.se.maedn.control;
+package de.htwg.ain.se.maedn.control;
 
 import de.htwg.ain.se.maedn.Player;
 
