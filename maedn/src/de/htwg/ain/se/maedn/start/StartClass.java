@@ -2,6 +2,7 @@ package de.htwg.ain.se.maedn.start;
 
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 
 
@@ -11,19 +12,25 @@ public class StartClass {
 
 	public static void main(String[] args) {
 		
-			System.out.println("Insert Tui or Gui");
-			Scanner scan = new Scanner(System.in);
-			String s = scan.next(); 
+		final String newLine = System.getProperty("line.separator");
+		final Logger log = Logger.getLogger("htwgMaedn");
+		
+		log.info(newLine + "Please insert Tui or Gui: ");
+
+		Scanner scan = new Scanner(System.in);
+		String s = scan.next(); 
+	
+		while(!s.equals("Tui") && !s.equals("Gui")){
+			log.info(newLine + "Please insert Tui or Gui: ");
+			s = scan.next();
+		}
+		
+		if(s.equals("Tui")){
+			TUI.getInstance().TUIstart();
+		}else if(s.equals("Gui")){
 			
-			if(s.equals("Tui")){
-				TUI.getInstance().TUIstart();
-			}else if(s.equals("Gui")){
-				
-			}else{
-				System.out.println("You made a wrong input so it starts the Gui");
-				
-			}
-			scan.close();
+		}
+		scan.close();
 	}
 
 }
