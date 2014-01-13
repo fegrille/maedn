@@ -9,11 +9,26 @@ import de.htwg.ain.se.maedn.control.Control;
 
 public final class TUI {
 	
-	private TUI() {
-		
-	}
-	
-	public static void main(final String[] args) {
+	/**
+	 * Performante und thread-safe Implementierung des Singleton-Patterns
+	 */
+    private static TUI instance = new TUI();
+ 
+    /**
+     * Default-Konstruktor, der nicht außerhalb dieser Klasse
+     * aufgerufen werden kann
+     */
+    private TUI() {}
+ 
+    /**
+     * Statische Methode, liefert die einzige Instanz dieser
+     * Klasse zurück
+     */
+    public static TUI getInstance() {
+        return instance;
+    }
+	    
+	public void TUIstart() {
 
 		int numberOfPlayers = 0;
 		int player = 1;
@@ -77,6 +92,7 @@ public final class TUI {
 					run = 0;
 					int choice;
 					while(run == 6 || run == 0) {
+						boolean figureAtHome = false;
 						run = c1.rolls();
 						log.info(newLine + "You rolled a " + run);
 						int checking[] = new int[2];
@@ -87,7 +103,7 @@ public final class TUI {
 							//check if there are still figures at home
 							for(int i = 1;i <= 4;i++){
 								if(c1.getPlayer(player).getFigure(i).isOnField() == false) {
-									
+									figureAtHome = true;
 									choice = i;
 									checking = c1.fieldStatus(1,player,i);
 									//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
@@ -114,8 +130,9 @@ public final class TUI {
 								}
 								
 							}
-							
-							continue;
+							if(figureAtHome){
+								continue;
+							}
 						}
 
 						// Check if the figurfiguree is able to be moved or if there are any collisions
@@ -343,6 +360,7 @@ public final class TUI {
 				run = 0;
 				int choice;
 				while(run == 6 || run == 0) {
+					boolean figureAtHome = false;
 					run = c1.rolls();
 					log.info(newLine + "You rolled a " + run);
 					int checking[] = new int[2];
@@ -353,7 +371,7 @@ public final class TUI {
 						//check if there are still figures at home
 						for(int i = 1;i <= 4;i++){
 							if(c1.getPlayer(player).getFigure(i).isOnField() == false) {
-								
+								figureAtHome = true;
 								choice = i;
 								checking = c1.fieldStatus(1,player,i);
 								//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
@@ -380,8 +398,9 @@ public final class TUI {
 							}
 							
 						}
-						
-						continue;
+						if(figureAtHome){
+							continue;
+						}
 					}
 
 					// Check if the figurfiguree is able to be moved or if there are any collisions

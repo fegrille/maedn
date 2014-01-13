@@ -87,12 +87,10 @@ public class Figure implements Ifigure{
 	//**********************Move****************************
 	@Override
 	public void move(int roll) {
-		if(roll < fields.size()) {
-			for(int i = 0; i < roll; i++){
-				if(!fields.isEmpty()) {
-					setPosition();
-				} 
-			}
+		for(int i = 0; i < roll; i++){
+			if(!fields.isEmpty()) {
+				setPosition();
+			} 
 		}
 	}
 	
