@@ -12,8 +12,9 @@ public class Control implements Icontrol{
 	private Kill killer = new Kill();
 	
 	private Player[] playerList;
-	public Fields field = new Fields();
-	
+	private Fields field = new Fields();
+
+
 	//**********************variables****************************
 	private static final int FIRSTPLAYER = 1;
 	private static final int SECONDPLAYER = 2;
@@ -64,10 +65,16 @@ public class Control implements Icontrol{
 	}
 	
 	@Override
-	public void setPlayerfield(Player[] playerList) {
-		this.playerList = playerList;
+	public void setPlayerfield(Player[] players) {
+		this.playerList = players;
 	}
 	
+	public Fields getField() {
+		return field;
+	}
+	public void setField(Fields field) {
+		this.field = field;
+	}
 	//**********************No Figure on Field****************************
 	@Override
 	public void noFigureOnField(int player) {

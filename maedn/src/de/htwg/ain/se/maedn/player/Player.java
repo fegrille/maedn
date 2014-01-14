@@ -36,8 +36,8 @@ public class Player implements Iplayer{
 	}
 	
 	@Override
-	public void setFigurefield(Figure[] figurefield) {
-		this.figurefield = figurefield;
+	public void setFigurefield(Figure[] figures) {
+		this.figurefield = figures;
 	}
 
 	//**********************Get Figure****************************

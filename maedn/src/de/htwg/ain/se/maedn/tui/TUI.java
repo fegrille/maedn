@@ -27,15 +27,15 @@ public final class TUI {
         return instance;
     }
     
-	int numberOfPlayers = 0;
-	int player = 1;
-	boolean win = false;
-	int winner = 0;
-	Control c1;
-	final String newLine = System.getProperty("line.separator");
-	final Logger log = Logger.getLogger("htwgMaedn");
-	Scanner scan = new Scanner(System.in);
-	String s;
+	private int numberOfPlayers = 0;
+	private int player = 1;
+	private boolean win = false;
+	private int winner = 0;
+	private Control c1;
+	private final String newLine = System.getProperty("line.separator");
+	private final Logger log = Logger.getLogger("htwgMaedn");
+	private Scanner scan = new Scanner(System.in);
+	private String s;
 
 
     
@@ -62,10 +62,7 @@ public final class TUI {
 			switchPlayer(player,11,41,42,43,44);
 			
 			// test if there is a wiener
-			if(c1.win(player)) {
-				win = true;
-				winner = player;
-			}
+			winner(player);
 			break;
 			
 		case(2):
@@ -74,10 +71,7 @@ public final class TUI {
 			switchPlayer(player,21,51,52,53,54);
 		
 			// test if there is a wiener
-			if(c1.win(player)) {
-				win = true;
-				winner = player;
-			}
+			winner(player);
 			break;
 
 		case(3):
@@ -86,10 +80,7 @@ public final class TUI {
 			switchPlayer(player,31,61,62,63,64);
 			
 			// test if there is a wiener
-			if(c1.win(player)) {
-				win = true;
-				winner = player;
-			}
+			winner(player);
 			break;
 			
 		case(4):
@@ -98,10 +89,7 @@ public final class TUI {
 			switchPlayer(player,1,71,72,73,74);
 			
 			// test if there is a wiener
-			if(c1.win(player)) {
-				win = true;
-				winner = player;
-			}
+			winner(player);
 			break;
 		}
 		if(player != numberOfPlayers) {
@@ -116,24 +104,10 @@ public final class TUI {
 	private void switchPlayer(final int player, final int beginField, final int endFieldOne, final int endFieldTwo, final int endFieldThree, final int endFieldFor){
 		int run = 0;
 		//***************No Figure On Field********************************************//
-		boolean isAFigureOnField = false;
-		for(int i = 1;i <= 4;i++){
-			if(c1.getPlayer(player).getFigure(i).isOnField() == true) {
-				isAFigureOnField = true;
-				break;
-			}
-
-		}
+		boolean isAFigureOnField = isFigureOnField(player);
 	
 		if(!isAFigureOnField) {
-			log.info(newLine + "Please enter 'roll' to roll: ");
-	
-			s = scan.next();
-			while(!s.equals("roll")) {
-				log.info(newLine + "Please enter 'roll'");
-				s = scan.next();
-			}
-			run = c1.start();
+			run = enterRoll();
 			if(run != 0) {
 				log.info(newLine + "Your first figure will put on field");
 
@@ -146,18 +120,11 @@ public final class TUI {
 		}
 		
 		//***************Just Roll********************************************//
-		log.info(newLine + "Please enter 'roll' to roll: ");
-		//***************insert roll********************************************//
-		s = scan.next();
-		while(!s.equals("roll")) {
-			log.info(newLine + "Please enter 'roll'");
-			s = scan.next();
-		}
 		run = 0;
 		int choice;
 		while(run == 6 || run == 0) {
 			boolean figureAtHome = false;
-			run = c1.rolls();
+			run = enterRoll();
 			log.info(newLine + "You rolled a " + run);
 			int checking[] = new int[2];
 			
@@ -200,7 +167,7 @@ public final class TUI {
 			}
 
 			// Check if the figurfiguree is able to be moved or if there are any collisions
-			checking = c1.field.getFieldStatus(beginField);
+			checking = c1.getField().getFieldStatus(beginField);
 			while (true){
 				
 				if(checking[0] == player ){
@@ -250,7 +217,7 @@ public final class TUI {
 				if(run > (c1.getPlayer(player).getFigure(choice).getList().size()-4)){
 					//*************************Figure not in End Position yet***********************
 					if(c1.getPlayer(player).getFigure(choice).getPosition()<=40){
-						checking = c1.field.getFieldStatus(endFieldOne);
+						checking = c1.getField().getFieldStatus(endFieldOne);
 						if(checking[0] == player){
 							continue;
 						}
@@ -259,7 +226,7 @@ public final class TUI {
 								break;
 							}
 						}
-						checking = c1.field.getFieldStatus(endFieldTwo);
+						checking = c1.getField().getFieldStatus(endFieldTwo);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
 								break;
@@ -267,7 +234,7 @@ public final class TUI {
 						}else{
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldThree);
+						checking = c1.getField().getFieldStatus(endFieldThree);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
 								break;
@@ -275,7 +242,7 @@ public final class TUI {
 						}else{
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldFor);
+						checking = c1.getField().getFieldStatus(endFieldFor);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size())){
 								break;
@@ -286,7 +253,7 @@ public final class TUI {
 							log.info(newLine + "You can't move, because Figure is already on last field!");
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldFor);
+						checking = c1.getField().getFieldStatus(endFieldFor);
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldThree){
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because Figure is already on last field!");
@@ -300,12 +267,12 @@ public final class TUI {
 							}
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldTwo){
-							checking = c1.field.getFieldStatus(endFieldThree);
+							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
-							checking = c1.field.getFieldStatus(endFieldFor);
+							checking = c1.getField().getFieldStatus(endFieldFor);
 							if(checking[0] == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
@@ -322,12 +289,12 @@ public final class TUI {
 							}
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldOne){
-							checking = c1.field.getFieldStatus(endFieldTwo);
+							checking = c1.getField().getFieldStatus(endFieldTwo);
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
-							checking = c1.field.getFieldStatus(endFieldThree);
+							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
@@ -335,7 +302,7 @@ public final class TUI {
 								}
 								break;
 							}
-							checking = c1.field.getFieldStatus(endFieldFor);
+							checking = c1.getField().getFieldStatus(endFieldFor);
 							if(checking[0] == player){
 								if(run <= 2){
 									break;
@@ -377,6 +344,31 @@ public final class TUI {
 			c1.changeFieldStatus(player, choice);
 			
 		}
+	}
+	public void winner(int p) {
+		if(c1.win(player)) {
+			win = true;
+			winner = player;
+		}
+	}
+	
+	public boolean isFigureOnField(int p) {
+		for(int i = 1;i <= 4;i++){
+			if(c1.getPlayer(player).getFigure(i).isOnField() == true) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+	
+	public int enterRoll() {
+		s = "";
+		while(!s.equals("roll")) {
+			log.info(newLine + "Please enter 'roll'");
+			s = scan.next();
+		}
+		return c1.start();
 	}
 
 }

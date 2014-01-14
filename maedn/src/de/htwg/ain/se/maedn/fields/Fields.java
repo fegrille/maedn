@@ -5,7 +5,7 @@ import java.util.TreeMap;
 public class Fields implements Ifields{
 	
 	//**********************Objects****************************
-	TreeMap<Integer,int[]> allFields = new TreeMap<Integer,int[]>();
+	private TreeMap<Integer,int[]> allFields = new TreeMap<Integer,int[]>();
 	
 	//**********************Constructor****************************
 	public Fields() {
