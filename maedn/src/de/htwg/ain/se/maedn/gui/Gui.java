@@ -362,7 +362,7 @@ public class Gui extends JFrame {
 			}
 
 			// Check if the figurfiguree is able to be moved or if there are any collisions
-			checking = c1.field.getFieldStatus(beginField);
+			checking = c1.getField().getFieldStatus(beginField);
 			while (true){
 				
 				if(checking[0] == player ){
@@ -426,7 +426,7 @@ public class Gui extends JFrame {
 				if(run > (c1.getPlayer(player).getFigure(choice).getList().size()-4)){
 					//*************************Figure not in End Position yet***********************
 					if(c1.getPlayer(player).getFigure(choice).getPosition()<=40){
-						checking = c1.field.getFieldStatus(endFieldOne);
+						checking = c1.getField().getFieldStatus(endFieldOne);
 						if(checking[0] == player){
 							continue;
 						}
@@ -435,7 +435,7 @@ public class Gui extends JFrame {
 								break;
 							}
 						}
-						checking = c1.field.getFieldStatus(endFieldTwo);
+						checking = c1.getField().getFieldStatus(endFieldTwo);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
 								break;
@@ -443,7 +443,7 @@ public class Gui extends JFrame {
 						}else{
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldThree);
+						checking = c1.getField().getFieldStatus(endFieldThree);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
 								break;
@@ -451,7 +451,7 @@ public class Gui extends JFrame {
 						}else{
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldFor);
+						checking = c1.getField().getFieldStatus(endFieldFor);
 						if(checking[0] != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size())){
 								break;
@@ -462,7 +462,7 @@ public class Gui extends JFrame {
 							log.info(newLine + "You can't move, because Figure is already on last field!");
 							continue;
 						}
-						checking = c1.field.getFieldStatus(endFieldFor);
+						checking = c1.getField().getFieldStatus(endFieldFor);
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldThree){
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because Figure is already on last field!");
@@ -476,12 +476,12 @@ public class Gui extends JFrame {
 							}
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldTwo){
-							checking = c1.field.getFieldStatus(endFieldThree);
+							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
-							checking = c1.field.getFieldStatus(endFieldFor);
+							checking = c1.getField().getFieldStatus(endFieldFor);
 							if(checking[0] == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
@@ -498,12 +498,12 @@ public class Gui extends JFrame {
 							}
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldOne){
-							checking = c1.field.getFieldStatus(endFieldTwo);
+							checking = c1.getField().getFieldStatus(endFieldTwo);
 							if(checking[0] == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
-							checking = c1.field.getFieldStatus(endFieldThree);
+							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
@@ -511,7 +511,7 @@ public class Gui extends JFrame {
 								}
 								break;
 							}
-							checking = c1.field.getFieldStatus(endFieldFor);
+							checking = c1.getField().getFieldStatus(endFieldFor);
 							if(checking[0] == player){
 								if(run <= 2){
 									break;
