@@ -54,7 +54,7 @@ public class Control implements Icontrol{
 				break;
 			
 			default:
-				System.out.println("Only 4 Players are possible");
+				log.info(newLine + "Only 4 Players are possible");
 				break;
 			
 			}
@@ -240,6 +240,7 @@ public class Control implements Icontrol{
 	public int collidateOwnFigures(int figure, int player, int run, int[] checking) {
 		int choice = figure;
 		while(checking[0] == player){
+			log.info(newLine + "You can`t move figure " + choice + " because it`s blocked by your own figure " + checking[1]);
 			choice = checking[1];
 			checking = fieldStatus(run,player,choice);
 		}

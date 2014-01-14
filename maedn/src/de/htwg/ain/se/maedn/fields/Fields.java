@@ -1,11 +1,12 @@
 package de.htwg.ain.se.maedn.fields;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Fields implements Ifields{
 	
 	//**********************Objects****************************
-	private TreeMap<Integer,int[]> allFields = new TreeMap<Integer,int[]>();
+	private Map<Integer,int[]> allFields = new TreeMap<Integer,int[]>();
 	
 	//**********************Constructor****************************
 	public Fields() {
