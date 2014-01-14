@@ -41,10 +41,9 @@ public class Fields implements Ifields{
 	}
 	
 	public int[] newfield() {
-		int[] a = new int[2];
+		int[] a = null;
 		a[0] = 0;
 		a[1] = 0;
 		return a;
 	}
-	
 }
