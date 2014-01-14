@@ -1,5 +1,7 @@
 package de.htwg.ain.se.maedn.control;
 
+import java.util.ArrayList;
+
 import de.htwg.ain.se.maedn.fields.Fields;
 import de.htwg.ain.se.maedn.kill.Kill;
 import de.htwg.ain.se.maedn.player.Player;
@@ -223,9 +225,9 @@ public class Control implements Icontrol{
 	}
 	//**********************Collidations****************************
 	@Override
-	public boolean collidateOtherFigures(final Integer[] fieldinfo) {
+	public boolean collidateOtherFigures(final ArrayList<Integer> fieldinfo) {
 		
-		playerList = killer.kill(playerList, fieldinfo[0], fieldinfo[1]);
+		playerList = killer.kill(playerList, fieldinfo.get(0), fieldinfo.get(1));
 		return true;
 	}
 	
@@ -243,10 +245,10 @@ public class Control implements Icontrol{
 	
 	//**********************Test Field status****************************
 	@Override
-	public Integer[] fieldStatus(int numberRolled,int player, int figure){
+	public ArrayList<Integer> fieldStatus(int numberRolled,int player, int figure){
 		
 		int newPosition = getPlayer(player).getFigure(figure).getList().get(numberRolled -1);
-		Integer status[] = field.getFieldStatus(newPosition);
+		ArrayList<Integer> status = field.getFieldStatus(newPosition);
 		
 		return status;
 	}
@@ -256,17 +258,17 @@ public class Control implements Icontrol{
 	@Override
 	public void changeFieldStatus(int player, int figure) {
 		
-		Integer[] information = new Integer[2];
-		information[0] = player;
-		information[1] = figure;
+		ArrayList<Integer> information = new ArrayList<>();
+		information.add(player);
+		information.add(figure);
 		field.setFieldStatus(getPlayer(player).getFigure(figure).getPosition(), information);
 	}
 	
 	@Override
 	public void deleteFieldStatus(int player, int figure) {
-		Integer[] information = new Integer[2];
-		information[0] = 0;
-		information[1] = 0;
+		ArrayList<Integer> information = new ArrayList<>();
+		information.add(0);
+		information.add(0);
 		field.setFieldStatus(getPlayer(player).getFigure(figure).getPosition(), information);
 	}
 	
@@ -279,32 +281,32 @@ public class Control implements Icontrol{
 		switch(player) {
 		case(1):
 			for(int i = 41; i < 45; i++) {
-				Integer[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
+				ArrayList<Integer> checking = field.getFieldStatus(i);
+				if(checking.get(0) == 0) {
 					end = false;
 				}
 			}
 			break;
 		case(2):
 			for(int i = 51; i < 55; i++) {
-				Integer[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
+				ArrayList<Integer> checking = field.getFieldStatus(i);
+				if(checking.get(0) == 0) {
 					end = false;
 				}
 			}
 			break;
 		case(3):
 			for(int i = 61; i < 65; i++) {
-				Integer[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
+				ArrayList<Integer> checking = field.getFieldStatus(i);
+				if(checking.get(0) == 0) {
 					end = false;
 				}
 			}
 			break;
 		case(4):
 			for(int i = 71; i < 75; i++) {
-				Integer[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
+				ArrayList<Integer> checking = field.getFieldStatus(i);
+				if(checking.get(0) == 0) {
 					end = false;
 				}
 			}

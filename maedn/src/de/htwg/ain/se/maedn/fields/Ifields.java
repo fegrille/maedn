@@ -1,5 +1,7 @@
 package de.htwg.ain.se.maedn.fields;
 
+import java.util.ArrayList;
+
 /**
  * Ifields saves status for every fields.
  * @author Felix Grille and Manuel Scheunemann
@@ -12,12 +14,12 @@ public interface Ifields {
 	 * @param number
 	 * @param figure.
 	 */
-	void setFieldStatus(int number, Integer[] figure);
+	void setFieldStatus(int number, ArrayList<Integer> figure);
 	
 	/**
 	 * Returns status of a field.
 	 * @param number
 	 * @return allFields.get(number).
 	 */
-	Integer[] getFieldStatus(int number);
+	ArrayList<Integer> getFieldStatus(int number);
 }

@@ -1,6 +1,7 @@
 package de.htwg.ain.se.maedn.tui;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -159,7 +160,7 @@ public final class TUI {
 			boolean figureAtHome = false;
 			run = c1.rolls();
 			log.info(newLine + "You rolled a " + run);
-			Integer checking[] = new Integer[2];
+			ArrayList<Integer> checking = new ArrayList<>();
 			
 			
 			//check if your roll is 6
@@ -171,13 +172,13 @@ public final class TUI {
 						choice = i;
 						checking = c1.fieldStatus(1,player,i);
 						//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
-						while(checking[0] == player){
-							choice = checking[1];
+						while(checking.get(0) == player){
+							choice = checking.get(1);
 							checking = c1.fieldStatus(run,player,choice);
 						}
 						// check if origin figure or figure that can move can kill other player`s figures
-						if(checking[0] > 0 && checking[0] < 5){
-							log.info(newLine + "You kill a Figure " + checking[1] + " from player " + checking[0] + "!");
+						if(checking.get(0) > 0 && checking.get(0) < 5){
+							log.info(newLine + "You kill a Figure " + checking.get(1) + " from player " + checking.get(0) + "!");
 							c1.collidateOtherFigures(checking);
 						}
 						//check if it`s still the origin figure and put it on field or move other figure
@@ -203,9 +204,9 @@ public final class TUI {
 			checking = c1.field.getFieldStatus(beginField);
 			while (true){
 				
-				if(checking[0] == player ){
-					log.info(newLine + "Your first field is blocked so this figure is chosen: " + checking[1]);
-					choice = checking[1];
+				if(checking.get(0) == player ){
+					log.info(newLine + "Your first field is blocked so this figure is chosen: " + checking.get(1));
+					choice = checking.get(1);
 					checking = c1.fieldStatus(run,player,choice);
 				} else {
 					StringBuilder positions = new StringBuilder();
@@ -240,9 +241,9 @@ public final class TUI {
 				}
 				//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
 				
-				while(checking[0] == player){
-					log.info(newLine + "You can`t move figure " + choice + " because it`s blocked by your own figure " + checking[1]);
-					choice = checking[1];
+				while(checking.get(0) == player){
+					log.info(newLine + "You can`t move figure " + choice + " because it`s blocked by your own figure " + checking.get(1));
+					choice = checking.get(1);
 					checking = c1.fieldStatus(run,player,choice);
 				}
 				
@@ -251,7 +252,7 @@ public final class TUI {
 					//*************************Figure not in End Position yet***********************
 					if(c1.getPlayer(player).getFigure(choice).getPosition()<=40){
 						checking = c1.field.getFieldStatus(endFieldOne);
-						if(checking[0] == player){
+						if(checking.get(0) == player){
 							continue;
 						}
 						else{
@@ -260,7 +261,7 @@ public final class TUI {
 							}
 						}
 						checking = c1.field.getFieldStatus(endFieldTwo);
-						if(checking[0] != player){
+						if(checking.get(0) != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
 								break;
 							}
@@ -268,7 +269,7 @@ public final class TUI {
 							continue;
 						}
 						checking = c1.field.getFieldStatus(endFieldThree);
-						if(checking[0] != player){
+						if(checking.get(0) != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-1)){
 								break;
 							}
@@ -276,7 +277,7 @@ public final class TUI {
 							continue;
 						}
 						checking = c1.field.getFieldStatus(endFieldFor);
-						if(checking[0] != player){
+						if(checking.get(0) != player){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size())){
 								break;
 							}
@@ -288,7 +289,7 @@ public final class TUI {
 						}
 						checking = c1.field.getFieldStatus(endFieldFor);
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldThree){
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								log.info(newLine + "You can't move, because Figure is already on last field!");
 								continue;
 							}else{
@@ -301,12 +302,12 @@ public final class TUI {
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldTwo){
 							checking = c1.field.getFieldStatus(endFieldThree);
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
 							checking = c1.field.getFieldStatus(endFieldFor);
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
 									continue;
@@ -323,12 +324,12 @@ public final class TUI {
 						}
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldOne){
 							checking = c1.field.getFieldStatus(endFieldTwo);
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								log.info(newLine + "You can't move, because there are too few fields!");
 								continue;
 							}
 							checking = c1.field.getFieldStatus(endFieldThree);
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								if(run != 1){
 									log.info(newLine + "You can't move, because there are too few fields!");
 									continue;
@@ -336,7 +337,7 @@ public final class TUI {
 								break;
 							}
 							checking = c1.field.getFieldStatus(endFieldFor);
-							if(checking[0] == player){
+							if(checking.get(0) == player){
 								if(run <= 2){
 									break;
 								}else{
@@ -359,11 +360,11 @@ public final class TUI {
 				
 				checking = c1.fieldStatus(run,player,choice);
 				
-				if(checking[0] == player){
+				if(checking.get(0) == player){
 					log.info(newLine + "You can't move, because there is one of your own figure! ");
 					continue;
-				} else if(checking[0] > 0 && checking[0] < 5){
-					log.info(newLine + "You kill a Figure " + checking[1] + " from player " + checking[0] + "!");
+				} else if(checking.get(0) > 0 && checking.get(0) < 5){
+					log.info(newLine + "You kill a Figure " + checking.get(1) + " from player " + checking.get(0) + "!");
 					c1.collidateOtherFigures(checking);
 					break;
 				}
