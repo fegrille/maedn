@@ -222,11 +222,8 @@ public class Control implements Icontrol{
 		}
 	}
 	//**********************Collidations****************************
-	public boolean collidateOwnFigures(final int[] fieldinfo, int player) {
-		return true;
-	}
 	@Override
-	public boolean collidateOtherFigures(final int[] fieldinfo) {
+	public boolean collidateOtherFigures(final Integer[] fieldinfo) {
 		
 		playerList = killer.kill(playerList, fieldinfo[0], fieldinfo[1]);
 		return true;
@@ -246,10 +243,10 @@ public class Control implements Icontrol{
 	
 	//**********************Test Field status****************************
 	@Override
-	public int[] fieldStatus(int numberRolled,int player, int figure){
+	public Integer[] fieldStatus(int numberRolled,int player, int figure){
 		
 		int newPosition = getPlayer(player).getFigure(figure).getList().get(numberRolled -1);
-		int status[] = field.getFieldStatus(newPosition);
+		Integer status[] = field.getFieldStatus(newPosition);
 		
 		return status;
 	}
@@ -259,7 +256,7 @@ public class Control implements Icontrol{
 	@Override
 	public void changeFieldStatus(int player, int figure) {
 		
-		int[] information = new int[2];
+		Integer[] information = new Integer[2];
 		information[0] = player;
 		information[1] = figure;
 		field.setFieldStatus(getPlayer(player).getFigure(figure).getPosition(), information);
@@ -267,7 +264,7 @@ public class Control implements Icontrol{
 	
 	@Override
 	public void deleteFieldStatus(int player, int figure) {
-		int[] information = new int[2];
+		Integer[] information = new Integer[2];
 		information[0] = 0;
 		information[1] = 0;
 		field.setFieldStatus(getPlayer(player).getFigure(figure).getPosition(), information);
@@ -282,7 +279,7 @@ public class Control implements Icontrol{
 		switch(player) {
 		case(1):
 			for(int i = 41; i < 45; i++) {
-				int[] checking = field.getFieldStatus(i);
+				Integer[] checking = field.getFieldStatus(i);
 				if(checking[0] == 0) {
 					end = false;
 				}
@@ -290,7 +287,7 @@ public class Control implements Icontrol{
 			break;
 		case(2):
 			for(int i = 51; i < 55; i++) {
-				int[] checking = field.getFieldStatus(i);
+				Integer[] checking = field.getFieldStatus(i);
 				if(checking[0] == 0) {
 					end = false;
 				}
@@ -298,7 +295,7 @@ public class Control implements Icontrol{
 			break;
 		case(3):
 			for(int i = 61; i < 65; i++) {
-				int[] checking = field.getFieldStatus(i);
+				Integer[] checking = field.getFieldStatus(i);
 				if(checking[0] == 0) {
 					end = false;
 				}
@@ -306,7 +303,7 @@ public class Control implements Icontrol{
 			break;
 		case(4):
 			for(int i = 71; i < 75; i++) {
-				int[] checking = field.getFieldStatus(i);
+				Integer[] checking = field.getFieldStatus(i);
 				if(checking[0] == 0) {
 					end = false;
 				}

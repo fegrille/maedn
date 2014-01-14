@@ -159,7 +159,7 @@ public final class TUI {
 			boolean figureAtHome = false;
 			run = c1.rolls();
 			log.info(newLine + "You rolled a " + run);
-			int checking[] = new int[2];
+			Integer checking[] = new Integer[2];
 			
 			
 			//check if your roll is 6

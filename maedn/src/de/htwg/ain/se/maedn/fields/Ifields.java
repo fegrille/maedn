@@ -12,12 +12,12 @@ public interface Ifields {
 	 * @param number
 	 * @param figure.
 	 */
-	void setFieldStatus(int number, int[] figure);
+	void setFieldStatus(int number, Integer[] figure);
 	
 	/**
 	 * Returns status of a field.
 	 * @param number
 	 * @return allFields.get(number).
 	 */
-	int[] getFieldStatus(int number);
+	Integer[] getFieldStatus(int number);
 }

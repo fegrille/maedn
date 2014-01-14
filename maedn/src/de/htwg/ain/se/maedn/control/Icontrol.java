@@ -111,7 +111,7 @@ public interface Icontrol {
 	 * @param int []fieldinfo
 	 * @return true if collidated and false if not
 	 */
-	boolean collidateOtherFigures(final int[] fieldinfo);
+	boolean collidateOtherFigures(final Integer[] fieldinfo);
 	
 	/**
 	 * Initialize the first roll methode from roll while there is no figure on field.
@@ -132,7 +132,7 @@ public interface Icontrol {
 	 * @param figure
 	 * @return fieldstatus
 	 */
-	int[] fieldStatus(int numberRolled,int player, int figure);
+	Integer[] fieldStatus(int numberRolled,int player, int figure);
 	
 	/**
 	 * Changes status of a field
