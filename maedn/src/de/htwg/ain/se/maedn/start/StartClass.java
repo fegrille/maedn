@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import de.htwg.ain.se.maedn.tui.TUI;
 import de.htwg.ain.se.maedn.gui.Gui;
 public final class StartClass {
-	
+	private StartClass() {
+		
+	}
 	public static void main(String[] args) {
 		
 

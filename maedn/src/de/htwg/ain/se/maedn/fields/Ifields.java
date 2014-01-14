@@ -1,7 +1,5 @@
 package de.htwg.ain.se.maedn.fields;
 
-import java.util.ArrayList;
-
 /**
  * Ifields saves status for every fields.
  * @author Felix Grille and Manuel Scheunemann
