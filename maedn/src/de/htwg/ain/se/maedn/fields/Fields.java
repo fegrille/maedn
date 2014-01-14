@@ -46,7 +46,7 @@ public class Fields implements Ifields{
 	
 	@Override
 	public int[] newfield() {
-		int[] a = null;
+		int[] a = new int[2];
 		a[0] = 0;
 		a[1] = 0;
 		return a;

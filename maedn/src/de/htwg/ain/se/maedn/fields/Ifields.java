@@ -27,5 +27,5 @@ public interface Ifields {
 	 * Creates a new Field
 	 * @return newfield
 	 */
-	public int[] newfield();
+	int[] newfield();
 }

@@ -36,12 +36,14 @@ public final class TUI {
 	private final Logger log = Logger.getLogger("htwgMaedn");
 	private Scanner scan = new Scanner(System.in);
 	private String s;
+	private String blocked = "You can't move, because Figure is already on last field!";
+	private String nomove = "You can't move, because Figure is already on last field!";
 
 
     
     
 	    
-	public void Tuistart() {
+	public void tuiStart() {
 
 		output("Enter Number of Players(2-4 Players possible): ");
 		
@@ -168,7 +170,7 @@ public final class TUI {
 							}
 						}
 						checking = c1.getField().getFieldStatus(endFieldTwo);
-						if(checking[0] != player){
+						if(checking[0] != player && run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
 							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size()-2)){
 								break;
 							}
@@ -184,24 +186,24 @@ public final class TUI {
 							continue;
 						}
 						checking = c1.getField().getFieldStatus(endFieldFor);
-						if(checking[0] != player){
-							if(run <= (c1.getPlayer(player).getFigure(choice).getList().size())){
+						if(checking[0] != player && run <= (c1.getPlayer(player).getFigure(choice).getList().size())){
 								break;
-							}
 						}
-					}else{//*************************Figure in End Position yet**********************
+					}else{
+						//*************************Figure in End Position yet**********************
+						
 						if(fourthEndField(endFieldFor, choice)){
-							output("You can't move, because Figure is already on last field!");
+							output(blocked);
 							continue;
 						}
 						checking = c1.getField().getFieldStatus(endFieldFor);
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldThree){
 							if(checking[0] == player){
-								output("You can't move, because Figure is already on last field!");
+								output(blocked);
 								continue;
 							}else{
 								if(run > 1){
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 								break;
@@ -210,13 +212,13 @@ public final class TUI {
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldTwo){
 							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
-								output("You can't move, because there are too few fields!");
+								output(nomove);
 								continue;
 							}
 							checking = c1.getField().getFieldStatus(endFieldFor);
 							if(checking[0] == player){
 								if(run != 1){
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 								break;
@@ -224,7 +226,7 @@ public final class TUI {
 								if(run <= 2){
 									break;
 								}else{
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 							}
@@ -232,13 +234,13 @@ public final class TUI {
 						if(c1.getPlayer(player).getFigure(choice).getPosition() == endFieldOne){
 							checking = c1.getField().getFieldStatus(endFieldTwo);
 							if(checking[0] == player){
-								output("You can't move, because there are too few fields!");
+								output(nomove);
 								continue;
 							}
 							checking = c1.getField().getFieldStatus(endFieldThree);
 							if(checking[0] == player){
 								if(run != 1){
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 								break;
@@ -248,20 +250,20 @@ public final class TUI {
 								if(run <= 2){
 									break;
 								}else{
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 							}else{
 								if(run <= 3){
 									break;
 								}else{
-									output("You can't move, because there are too few fields!");
+									output(nomove);
 									continue;
 								}
 							}
 						}
 					}
-					output("You can't move, because there are too few fields!");
+					output(nomove);
 					continue;
 				}
 				

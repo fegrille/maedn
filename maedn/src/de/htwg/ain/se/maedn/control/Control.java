@@ -23,6 +23,10 @@ public class Control implements Icontrol{
 	private static final int SECONDPLAYER = 2;
 	private static final int THIRDPLAYER = 3;
 	private static final int FOURTHPLAYER = 4;
+	private static final int FIRSTFIGURE = 1;
+	private static final int SECONDFIGURE = 2;
+	private static final int THIRDFIGURE = 3;
+	private static final int FOURTHFIGURE = 4;
 	
 	private boolean figureOnField1 = false;
 	private boolean figureOnField2 = false;
@@ -37,19 +41,19 @@ public class Control implements Icontrol{
 		playerList = new Player[numberOfPlayers];
 		for(int i = 0; i < numberOfPlayers; i++) {
 			switch(a) {
-			case(1):
+			case(FIRSTPLAYER):
 				playerList[i] = new Player("blue",a);
 				a++;
 				break;
-			case(2):
+			case(SECONDPLAYER):
 				playerList[i] = new Player("green",a);
 				a++;
 				break;
-			case(3):
+			case(THIRDPLAYER):
 				playerList[i] = new Player("yellow",a);
 				a++;
 				break;
-			case(4):
+			case(FOURTHPLAYER):
 				playerList[i] = new Player("red",a);
 				break;
 			
@@ -154,95 +158,96 @@ public class Control implements Icontrol{
 	//**********************put Figures on Field****************************
 	@Override
 	public void putBlueOnField() {
-		if(!getPlayer(FIRSTPLAYER).getFigure(1).isOnField()){
-			getPlayer(FIRSTPLAYER).getFigure(1).putOnField();
-			changeFieldStatus(FIRSTPLAYER , 1);
+		if(!getPlayer(FIRSTPLAYER).getFigure(FIRSTFIGURE).isOnField()){
+			getPlayer(FIRSTPLAYER).getFigure(FIRSTFIGURE).putOnField();
+			changeFieldStatus(FIRSTPLAYER , FIRSTFIGURE);
 			setFigureOnField1(true);
 			
-		} else if (!getPlayer(FIRSTPLAYER).getFigure(2).isOnField()){
-			getPlayer(FIRSTPLAYER).getFigure(2).putOnField();
-			changeFieldStatus(FIRSTPLAYER , 2);
+		} else if (!getPlayer(FIRSTPLAYER).getFigure(SECONDFIGURE).isOnField()){
+			getPlayer(FIRSTPLAYER).getFigure(SECONDFIGURE).putOnField();
+			changeFieldStatus(FIRSTPLAYER , SECONDFIGURE);
 			setFigureOnField1(true);
-		} else if (!getPlayer(FIRSTPLAYER).getFigure(3).isOnField()){
-			getPlayer(FIRSTPLAYER).getFigure(3).putOnField();
-			changeFieldStatus(FIRSTPLAYER , 3);
+		} else if (!getPlayer(FIRSTPLAYER).getFigure(THIRDFIGURE).isOnField()){
+			getPlayer(FIRSTPLAYER).getFigure(THIRDFIGURE).putOnField();
+			changeFieldStatus(FIRSTPLAYER , THIRDFIGURE);
 			setFigureOnField1(true);
 		} else {
-			getPlayer(FIRSTPLAYER).getFigure(4).putOnField();
-			changeFieldStatus(FIRSTPLAYER , 4);
+			getPlayer(FIRSTPLAYER).getFigure(FOURTHFIGURE).putOnField();
+			changeFieldStatus(FIRSTPLAYER , FOURTHFIGURE);
 			setFigureOnField1(true);
 		}
 	}
 	
 	@Override
 	public void putGreenOnField() {
-		if(!getPlayer(SECONDPLAYER).getFigure(1).isOnField()){
-			getPlayer(SECONDPLAYER).getFigure(1).putOnField();
-			changeFieldStatus(SECONDPLAYER , 1);
+		if(!getPlayer(SECONDPLAYER).getFigure(FIRSTFIGURE).isOnField()){
+			getPlayer(SECONDPLAYER).getFigure(FIRSTFIGURE).putOnField();
+			changeFieldStatus(SECONDPLAYER , FIRSTFIGURE);
 			setFigureOnField2(true);
-		} else if (!getPlayer(SECONDPLAYER).getFigure(2).isOnField()){
-			getPlayer(SECONDPLAYER).getFigure(2).putOnField();
-			changeFieldStatus(SECONDPLAYER , 2);
+		} else if (!getPlayer(SECONDPLAYER).getFigure(SECONDFIGURE).isOnField()){
+			getPlayer(SECONDPLAYER).getFigure(SECONDFIGURE).putOnField();
+			changeFieldStatus(SECONDPLAYER , SECONDFIGURE);
 			setFigureOnField2(true);
-		} else if (!getPlayer(SECONDPLAYER).getFigure(3).isOnField()){
-			getPlayer(SECONDPLAYER).getFigure(3).putOnField();
-			changeFieldStatus(SECONDPLAYER , 3);
+		} else if (!getPlayer(SECONDPLAYER).getFigure(THIRDFIGURE).isOnField()){
+			getPlayer(SECONDPLAYER).getFigure(THIRDFIGURE).putOnField();
+			changeFieldStatus(SECONDPLAYER , THIRDFIGURE);
 			setFigureOnField2(true);
 		} else {
-			getPlayer(SECONDPLAYER).getFigure(4).putOnField();
-			changeFieldStatus(SECONDPLAYER , 4);
+			getPlayer(SECONDPLAYER).getFigure(FOURTHFIGURE).putOnField();
+			changeFieldStatus(SECONDPLAYER , FOURTHFIGURE);
 			setFigureOnField2(true);
 		}
 	}
 	
 	@Override
 	public void putYellowOnField() {
-		if(!getPlayer(THIRDPLAYER).getFigure(1).isOnField()){
-			getPlayer(THIRDPLAYER).getFigure(1).putOnField();
-			changeFieldStatus(THIRDPLAYER , 1);
+		if(!getPlayer(THIRDPLAYER).getFigure(FIRSTFIGURE).isOnField()){
+			getPlayer(THIRDPLAYER).getFigure(FIRSTFIGURE).putOnField();
+			changeFieldStatus(THIRDPLAYER , FIRSTFIGURE);
 			setFigureOnField3(true);
-		} else if (!getPlayer(THIRDPLAYER).getFigure(2).isOnField()){
-			getPlayer(THIRDPLAYER).getFigure(2).putOnField();
-			changeFieldStatus(THIRDPLAYER , 2);
+		} else if (!getPlayer(THIRDPLAYER).getFigure(SECONDFIGURE).isOnField()){
+			getPlayer(THIRDPLAYER).getFigure(SECONDFIGURE).putOnField();
+			changeFieldStatus(THIRDPLAYER , SECONDFIGURE);
 			setFigureOnField3(true);
-		} else if (!getPlayer(THIRDPLAYER).getFigure(3).isOnField()){
-			getPlayer(THIRDPLAYER).getFigure(3).putOnField();
-			changeFieldStatus(THIRDPLAYER , 3);
+		} else if (!getPlayer(THIRDPLAYER).getFigure(THIRDFIGURE).isOnField()){
+			getPlayer(THIRDPLAYER).getFigure(THIRDFIGURE).putOnField();
+			changeFieldStatus(THIRDPLAYER , THIRDFIGURE);
 			setFigureOnField3(true);
 		} else {
-			getPlayer(THIRDPLAYER).getFigure(4).putOnField();
-			changeFieldStatus(THIRDPLAYER , 4);
+			getPlayer(THIRDPLAYER).getFigure(FOURTHFIGURE).putOnField();
+			changeFieldStatus(THIRDPLAYER , FOURTHFIGURE);
 			setFigureOnField3(true);
 		}
 	}
 	
 	@Override
 	public void putRedOnField() {
-		if(!getPlayer(FOURTHPLAYER).getFigure(1).isOnField()){
-			getPlayer(FOURTHPLAYER).getFigure(1).putOnField();
-			changeFieldStatus(FOURTHPLAYER , 1);
+		if(!getPlayer(FOURTHPLAYER).getFigure(FIRSTFIGURE).isOnField()){
+			getPlayer(FOURTHPLAYER).getFigure(FIRSTFIGURE).putOnField();
+			changeFieldStatus(FOURTHPLAYER , FIRSTFIGURE);
 			setFigureOnField4(true);
-		} else if (!getPlayer(FOURTHPLAYER).getFigure(2).isOnField()){
-			getPlayer(FOURTHPLAYER).getFigure(2).putOnField();
-			changeFieldStatus(FOURTHPLAYER , 2);
+		} else if (!getPlayer(FOURTHPLAYER).getFigure(SECONDFIGURE).isOnField()){
+			getPlayer(FOURTHPLAYER).getFigure(SECONDFIGURE).putOnField();
+			changeFieldStatus(FOURTHPLAYER , SECONDFIGURE);
 			setFigureOnField4(true);
-		} else if (!getPlayer(FOURTHPLAYER).getFigure(3).isOnField()){
-			getPlayer(FOURTHPLAYER).getFigure(3).putOnField();
-			changeFieldStatus(FOURTHPLAYER , 3);
+		} else if (!getPlayer(FOURTHPLAYER).getFigure(THIRDFIGURE).isOnField()){
+			getPlayer(FOURTHPLAYER).getFigure(THIRDFIGURE).putOnField();
+			changeFieldStatus(FOURTHPLAYER , THIRDFIGURE);
 			setFigureOnField4(true);
 		} else {
-			getPlayer(FOURTHPLAYER).getFigure(4).putOnField();
-			changeFieldStatus(FOURTHPLAYER , 4);
+			getPlayer(FOURTHPLAYER).getFigure(FOURTHFIGURE).putOnField();
+			changeFieldStatus(FOURTHPLAYER , FOURTHFIGURE);
 			setFigureOnField4(true);
 		}
 	}
 	//**********************Collidations****************************
 	public int collidateOwnFigures(int figure, int player, int run, int[] checking) {
 		int choice = figure;
-		while(checking[0] == player){
-			log.info(newLine + "You can`t move figure " + choice + " because it`s blocked by your own figure " + checking[1]);
-			choice = checking[1];
-			checking = fieldStatus(run,player,choice);
+		int[] check = checking;
+		while(check[0] == player){
+			log.info(newLine + "You can`t move figure " + choice + " because it`s blocked by your own figure " + check[1]);
+			choice = check[1];
+			check = fieldStatus(run,player,choice);
 		}
 		return choice;
 	}
@@ -300,19 +305,30 @@ public class Control implements Icontrol{
 	
 	@Override
 	public boolean win(int player) {
-		boolean end = true;
+		boolean end = true;		
+		int startOfEnd;
+		int endOfEnd;
 		switch(player) {
-		case(1):
-			end = checkwin(41,45);
+
+		case(FIRSTPLAYER):
+			startOfEnd = 41;
+			endOfEnd = 45;
+			end = checkwin(startOfEnd,endOfEnd);
 			break;
-		case(2):
-			end = checkwin(51,55);
+		case(SECONDPLAYER):
+			startOfEnd = 51;
+			endOfEnd = 55;
+			end = checkwin(startOfEnd,endOfEnd);
 			break;
-		case(3):
-			end = checkwin(61,65);
+		case(THIRDPLAYER):
+			startOfEnd = 61;
+			endOfEnd = 65;
+			end = checkwin(startOfEnd,endOfEnd);
 			break;
-		case(4):
-			end = checkwin(71,75);
+		case(FOURTHPLAYER):
+			startOfEnd = 71;
+			endOfEnd = 75;
+			end = checkwin(startOfEnd,endOfEnd);
 			break;
 		}
 		return end;

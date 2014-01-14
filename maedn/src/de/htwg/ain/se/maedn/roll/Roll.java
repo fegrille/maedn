@@ -27,8 +27,9 @@ public class Roll implements Iroll{
 		if(chuck == 6) {
 			return chuck;
 		}
-		else
+		else {
 			return maxmove;
+		}
 	}
 
 }

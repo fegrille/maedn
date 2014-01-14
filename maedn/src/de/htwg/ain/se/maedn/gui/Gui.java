@@ -195,7 +195,7 @@ public class Gui extends JFrame {
 	Scanner scan = new Scanner(System.in);
 	String s;
 	
-	public void GuiStart() {
+	public void guiStart() {
 
 		ShowText.setText(newLine + "Enter Number of Players(2-4 Players possible): ");
 		
