@@ -27,48 +27,26 @@ public class Figure implements Ifigure{
 	public Figure(final int player) {
 		switch(player) {
 		case(1):
-			for(int i = STARTOFBLUE; i <= ENDPOSITIONRED; i++){
-				fields.add(i);
-			}
-			for(int i = 1; i <= ENDPOSITIONBLUE; i++) {
-				fields.add(i);
-			}
-			for(int i = 41; i < 45; i++) {
-				fields.add(i);
-			}
+			addFields(STARTOFBLUE,ENDPOSITIONRED);
+			addFields(1,ENDPOSITIONBLUE); 
+			addFields(41,45);
 			break;
 		case(2):
 			
-			for(int i = STARTOFGREEN; i <= ENDPOSITIONRED; i++){
-				fields.add(i);
-			}
-			for(int i = 1; i <= ENDPOSITIONGREEN; i++) {
-				fields.add(i);
-			}
-			for(int i = 51; i < 55; i++) {
-				fields.add(i);
-			}
+			addFields(STARTOFGREEN,ENDPOSITIONRED);
+			addFields(1,ENDPOSITIONGREEN);
+			addFields(51, 55);
 			break;
 		case(THIRDCASE):
 
-			for(int i = STARTOFYELLOW; i <= ENDPOSITIONRED; i++){
-				fields.add(i);
-			}
-			for(int i = 1; i <= ENDPOSITIONYELLOW; i++) {
-				fields.add(i);
-			}
-			for(int i = 61; i < 65; i++) {
-				fields.add(i);
-			}
+			addFields(STARTOFYELLOW,ENDPOSITIONRED);
+			addFields(1,ENDPOSITIONYELLOW);
+			addFields(61,65);
 			break;
 		case(FOURTHCASE):
 			
-			for(int i = 1; i <= ENDPOSITIONRED; i++){
-				fields.add(i);
-			}
-			for(int i = 71; i < 75; i++) {
-				fields.add(i);
-			}
+			addFields(1,ENDPOSITIONRED);
+			addFields(71,75);
 			break;
 		}
 	}
@@ -127,5 +105,11 @@ public class Figure implements Ifigure{
 	@Override
 	public void setList(List<Integer> newList){
 		fields = newList;
+	}
+	
+	public void addFields(int start, int end) {
+		for(int i = start; i <= end; i++){
+			fields.add(i);
+		}
 	}
 }

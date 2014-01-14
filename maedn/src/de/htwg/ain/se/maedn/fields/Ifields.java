@@ -22,4 +22,10 @@ public interface Ifields {
 	 * @return allFields.get(number).
 	 */
 	int[] getFieldStatus(int number);
+	
+	/**
+	 * Creates a new Field
+	 * @return newfield
+	 */
+	public int[] newfield();
 }

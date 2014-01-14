@@ -1,5 +1,8 @@
 package de.htwg.ain.se.maedn.control;
 
+import java.util.Arrays;
+import java.util.logging.Logger;
+
 import de.htwg.ain.se.maedn.fields.Fields;
 import de.htwg.ain.se.maedn.kill.Kill;
 import de.htwg.ain.se.maedn.player.Player;
@@ -25,7 +28,8 @@ public class Control implements Icontrol{
 	private boolean figureOnField2 = false;
 	private boolean figureOnField3 = false;
 	private boolean figureOnField4 = false;
-
+	private final String newLine = System.getProperty("line.separator");
+	private final Logger log = Logger.getLogger("htwgMaedn");
 	
 	//**********************Constructor****************************
 	public Control(int numberOfPlayers) {
@@ -66,6 +70,11 @@ public class Control implements Icontrol{
 	
 	@Override
 	public void setPlayerfield(Player[] players) {
+		if(players == null) { 
+		    this.playerList = new Player[0]; 
+		  } else { 
+		   this.playerList = Arrays.copyOf(players, players.length); 
+		  } 
 		this.playerList = players;
 	}
 	
@@ -229,14 +238,20 @@ public class Control implements Icontrol{
 		}
 	}
 	//**********************Collidations****************************
-	public boolean collidateOwnFigures(final int[] fieldinfo, int player) {
-		return true;
+	public int collidateOwnFigures(int figure, int player, int run, int[] checking) {
+		int choice = figure;
+		while(checking[0] == player){
+			choice = checking[1];
+			checking = fieldStatus(run,player,choice);
+		}
+		return choice;
 	}
 	@Override
-	public boolean collidateOtherFigures(final int[] fieldinfo) {
-		
-		playerList = killer.kill(playerList, fieldinfo[0], fieldinfo[1]);
-		return true;
+	public void collidateOtherFigures(int[] checking) {
+		if(checking[0] > 0 && checking[0] < 5){
+			log.info(newLine + "You kill a Figure " + checking[1] + " from player " + checking[0] + "!");
+			playerList = killer.kill(playerList, checking[0], checking[1]);
+		}
 	}
 	
 	//**********************Initialisizing first Roll****************************
@@ -288,41 +303,30 @@ public class Control implements Icontrol{
 		boolean end = true;
 		switch(player) {
 		case(1):
-			for(int i = 41; i < 45; i++) {
-				int[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
-					end = false;
-				}
-			}
+			end = checkwin(41,45);
 			break;
 		case(2):
-			for(int i = 51; i < 55; i++) {
-				int[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
-					end = false;
-				}
-			}
+			end = checkwin(51,55);
 			break;
 		case(3):
-			for(int i = 61; i < 65; i++) {
-				int[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
-					end = false;
-				}
-			}
+			end = checkwin(61,65);
 			break;
 		case(4):
-			for(int i = 71; i < 75; i++) {
-				int[] checking = field.getFieldStatus(i);
-				if(checking[0] == 0) {
-					end = false;
-				}
-			}
+			end = checkwin(71,75);
 			break;
 		}
 		return end;
 	}
 	
+	public boolean checkwin (int startOfEnd, int endOfEnd) {
+		for(int i = startOfEnd; i < endOfEnd; i++) {
+			int[] checking = field.getFieldStatus(i);
+			if(checking[0] == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }
 

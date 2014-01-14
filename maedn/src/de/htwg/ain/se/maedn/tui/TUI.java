@@ -136,17 +136,11 @@ public final class TUI {
 					if(c1.getPlayer(player).getFigure(i).isOnField() == false) {
 						figureAtHome = true;
 						choice = i;
-						checking = c1.fieldStatus(1,player,i);
+						checking = c1.fieldStatus(1,player,choice);
 						//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
-						while(checking[0] == player){
-							choice = checking[1];
-							checking = c1.fieldStatus(run,player,choice);
-						}
-						// check if origin figure or figure that can move can kill other player`s figures
-						if(checking[0] > 0 && checking[0] < 5){
-							log.info(newLine + "You kill a Figure " + checking[1] + " from player " + checking[0] + "!");
-							c1.collidateOtherFigures(checking);
-						}
+						choice = c1.collidateOwnFigures(choice, player, run, checking);
+						// check if origin figure or figure that can move can kill other player`s figures + "!");
+						c1.collidateOtherFigures(checking);
 						//check if it`s still the origin figure and put it on field or move other figure
 						if(choice == i) {
 							c1.getPlayer(player).getFigure(i).putOnField();

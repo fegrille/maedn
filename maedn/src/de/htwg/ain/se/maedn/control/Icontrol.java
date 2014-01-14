@@ -111,7 +111,7 @@ public interface Icontrol {
 	 * @param int []fieldinfo
 	 * @return true if collidated and false if not
 	 */
-	boolean collidateOtherFigures(final int[] fieldinfo);
+	void collidateOtherFigures(int[] checking);
 	
 	/**
 	 * Initialize the first roll methode from roll while there is no figure on field.

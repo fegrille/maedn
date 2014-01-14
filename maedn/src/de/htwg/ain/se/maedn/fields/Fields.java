@@ -10,19 +10,19 @@ public class Fields implements Ifields{
 	//**********************Constructor****************************
 	public Fields() {
 		for(int i = 1; i <= 40; i++) {
-			allFields.put(i,newfield());
+			allFields.put(i,createfield());
 		}
 		for(int i = 41; i < 45; i++) {
-			allFields.put(i,newfield());
+			allFields.put(i,createfield());
 		}
 		for(int i = 51; i < 55; i++) {
-			allFields.put(i,newfield());
+			allFields.put(i,createfield());
 		}
 		for(int i = 61; i < 65; i++) {
-			allFields.put(i,newfield());
+			allFields.put(i,createfield());
 		}
 		for(int i = 71; i < 75; i++) {
-			allFields.put(i,newfield());
+			allFields.put(i,createfield());
 		}
 	}
 
@@ -39,6 +39,11 @@ public class Fields implements Ifields{
 		
 	}
 	
+	private int[] createfield() {
+		return newfield();
+	}
+	
+	@Override
 	public int[] newfield() {
 		int[] a = null;
 		a[0] = 0;
