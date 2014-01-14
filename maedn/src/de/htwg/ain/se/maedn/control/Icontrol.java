@@ -1,7 +1,5 @@
 package de.htwg.ain.se.maedn.control;
 
-import java.util.ArrayList;
-
 import de.htwg.ain.se.maedn.player.Player;
 
 
@@ -113,7 +111,7 @@ public interface Icontrol {
 	 * @param int []fieldinfo
 	 * @return true if collidated and false if not
 	 */
-	boolean collidateOtherFigures(final ArrayList<Integer> fieldinfo);
+	boolean collidateOtherFigures(final int[] fieldinfo);
 	
 	/**
 	 * Initialize the first roll methode from roll while there is no figure on field.
@@ -134,7 +132,7 @@ public interface Icontrol {
 	 * @param figure
 	 * @return fieldstatus
 	 */
-	ArrayList<Integer> fieldStatus(int numberRolled,int player, int figure);
+	int[] fieldStatus(int numberRolled,int player, int figure);
 	
 	/**
 	 * Changes status of a field
