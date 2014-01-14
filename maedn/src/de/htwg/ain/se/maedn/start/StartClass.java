@@ -7,10 +7,12 @@ import java.util.logging.Logger;
 
 
 import de.htwg.ain.se.maedn.tui.TUI;
-
+import de.htwg.ain.se.maedn.gui.Gui;
 public class StartClass {
 
 	public static void main(String[] args) {
+		
+
 		
 		final String newLine = System.getProperty("line.separator");
 		final Logger log = Logger.getLogger("htwgMaedn");
@@ -28,7 +30,8 @@ public class StartClass {
 		if(s.equals("Tui")){
 			TUI.getInstance().TUIstart();
 		}else if(s.equals("Gui")){
-			
+			Gui gui = new Gui();
+			gui.GuiStart();
 		}
 		scan.close();
 	}
