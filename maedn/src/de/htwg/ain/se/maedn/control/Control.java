@@ -69,13 +69,12 @@ public class Control implements Icontrol{
 	}
 	
 	@Override
-	public void setPlayerfield(Player[] players) {
-		if(players == null) { 
+	public void setPlayerfield(Player[] newPlayerList) {
+		if(newPlayerList == null) { 
 		    this.playerList = new Player[0]; 
 		  } else { 
-		   this.playerList = Arrays.copyOf(players, players.length); 
+		   this.playerList = Arrays.copyOf(newPlayerList, newPlayerList.length); 
 		  } 
-		this.playerList = players;
 	}
 	
 	public Fields getField() {

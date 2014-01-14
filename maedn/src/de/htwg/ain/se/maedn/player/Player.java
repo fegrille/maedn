@@ -44,7 +44,6 @@ public class Player implements Iplayer{
 		  } else { 
 		    this.figurefield = Arrays.copyOf(figures, figures.length); 
 		  } 
-		this.figurefield = figures;
 	}
 
 	//**********************Get Figure****************************

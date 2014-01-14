@@ -121,77 +121,27 @@ public final class TUI {
 		
 		//***************Just Roll********************************************//
 		run = 0;
-		int choice;
+		int choice = 0;
+		int checking[] = new int[2];
 		while(run == 6 || run == 0) {
 			boolean figureAtHome = false;
 			run = enterRoll();
 			log.info(newLine + "You rolled a " + run);
-			int checking[] = new int[2];
-			
 			
 			//check if your roll is 6
-			if(run == 6){
-				//check if there are still figures at home
-				for(int i = 1;i <= 4;i++){
-					if(c1.getPlayer(player).getFigure(i).isOnField() == false) {
-						figureAtHome = true;
-						choice = i;
-						checking = c1.fieldStatus(1,player,choice);
-						//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
-						choice = c1.collidateOwnFigures(choice, player, run, checking);
-						// check if origin figure or figure that can move can kill other player`s figures + "!");
-						c1.collidateOtherFigures(checking);
-						//check if it`s still the origin figure and put it on field or move other figure
-						if(choice == i) {
-							c1.getPlayer(player).getFigure(i).putOnField();
-							c1.changeFieldStatus(player, choice);
-						} else {
-							c1.deleteFieldStatus(player, choice);
-							c1.getPlayer(player).getFigure(choice).move(run);
-							c1.changeFieldStatus(player, choice);
-						}
-						
-						break;
-					}
-					
-				}
-				if(figureAtHome){
-					continue;
-				}
+			checking = c1.fieldStatus(1,player,choice);
+			figureAtHome = rolledSix(run, checking);
+			if(figureAtHome){
+				continue;
 			}
 
-			// Check if the figurfiguree is able to be moved or if there are any collisions
+			// Check if the figure is able to be moved or if there are any collisions
 			checking = c1.getField().getFieldStatus(beginField);
 			while (true){
 				
-				if(checking[0] == player ){
-					log.info(newLine + "Your first field is blocked so this figure is chosen: " + checking[1]);
-					choice = checking[1];
-					checking = c1.fieldStatus(run,player,choice);
-				} else {
-					StringBuilder positions = new StringBuilder();
-					for(int i = 1; i <= numberOfPlayers; i++) {
-						for(int a = 1; a <= 4; a++) {
-							if(c1.getPlayer(i).getFigure(a).isOnField())
-							positions.append("Figure " + a + " from player " + i + " is on position " + c1.getPlayer(i).getFigure(a).getPosition() + "\n");
-						}
-					}
-					log.info(newLine + positions);
-					log.info(newLine + "Select figure you want to move (enter 1,2,3 or 4) or 0 if you want to skip your move: ");
-
-					s = scan.next();
-					while(!s.equals("1") && !s.equals("2") && !s.equals("3") && !s.equals("4") && !s.equals("0")){
-						log.info(newLine + "Select figure you want to move (enter 1,2,3 or 4) or 0 if you want to skip your move: ");
-						s = scan.next();
-					}
-					
-					choice = Integer.parseInt(s);
-					if(choice < 0 || choice > 4) {
-						log.info(newLine + "You entered a wrong number " + choice + "!");
-						continue;
-					}
-
-				}
+				choice = choosefigure(checking,run);
+				checking = c1.fieldStatus(run,player,choice);
+				
 				if(choice == 0) {
 					break;
 				}
@@ -336,9 +286,9 @@ public final class TUI {
 			c1.deleteFieldStatus(player, choice);
 			c1.getPlayer(player).getFigure(choice).move(run);
 			c1.changeFieldStatus(player, choice);
-			
 		}
 	}
+	
 	public void winner(int p) {
 		if(c1.win(player)) {
 			win = true;
@@ -348,7 +298,7 @@ public final class TUI {
 	
 	public boolean isFigureOnField(int p) {
 		for(int i = 1;i <= 4;i++){
-			if(c1.getPlayer(player).getFigure(i).isOnField() == true) {
+			if(c1.getPlayer(player).getFigure(i).isOnField()) {
 				return true;
 			}
 
@@ -363,6 +313,66 @@ public final class TUI {
 			s = scan.next();
 		}
 		return c1.start();
+	}
+	
+	public boolean rolledSix(int roll, int[] checking) {
+		boolean figureHome = false;
+		int choice;
+		if(roll == 6){
+			//check if there are still figures at home
+			for(int i = 1;i <= 4;i++){
+				if(!c1.getPlayer(player).getFigure(i).isOnField()) {
+					figureHome = true;
+					choice = i;
+					checking = c1.fieldStatus(1,player,choice);
+					//check if first field is blocked with own figure and if the blocking figure get blocked with own figures
+					choice = c1.collidateOwnFigures(choice, player, roll, checking);
+					// check if origin figure or figure that can move can kill other player`s figures + "!");
+					c1.collidateOtherFigures(checking);
+					//check if it`s still the origin figure and put it on field or move other figure
+					if(choice == i) {
+						c1.getPlayer(player).getFigure(i).putOnField();
+						c1.changeFieldStatus(player, choice);
+					} else {
+						c1.deleteFieldStatus(player, choice);
+						c1.getPlayer(player).getFigure(choice).move(roll);
+						c1.changeFieldStatus(player, choice);
+					}
+					
+					break;
+				}
+				
+			}
+		}
+		return figureHome;
+	}
+	
+	public int choosefigure(int[] checking, int roll) {
+		int choice = 0;
+		if(checking[0] == player ){
+			log.info(newLine + "Your first field is blocked so this figure is chosen: " + checking[1]);
+			choice = checking[1];
+		} else {
+			StringBuilder positions = new StringBuilder();
+			for(int i = 1; i <= numberOfPlayers; i++) {
+				for(int a = 1; a <= 4; a++) {
+					if(c1.getPlayer(i).getFigure(a).isOnField())
+					positions.append("Figure " + a + " from player " + i + " is on position " + c1.getPlayer(i).getFigure(a).getPosition() + "\n");
+				}
+			}
+			log.info(newLine + positions);
+			s = "";
+			while(!s.equals("1") && !s.equals("2") && !s.equals("3") && !s.equals("4") && !s.equals("0")){
+				log.info(newLine + "Select figure you want to move (enter 1,2,3 or 4) or 0 if you want to skip your move: ");
+				s = scan.next();
+				choice = Integer.parseInt(s);
+				if(choice < 0 || choice > 4) {
+					log.info(newLine + "You entered a wrong number " + choice + "!");
+				continue;
+				}
+			}
+		}
+		return choice;
 	}
 
 }
